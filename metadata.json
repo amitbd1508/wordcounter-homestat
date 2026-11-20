@@ -1,0 +1,6 @@
+{
+  "name": "VoxPi Speech Intelligence",
+  "description": "Self-hosted Personal AI Speech Intelligence System with Raspberry Pi node & real-time mobile analytics, word counting, contextual filler word analysis, and AI journal.",
+  "requestFramePermissions": ["microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

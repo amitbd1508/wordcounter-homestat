@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  voxpi-speech-node:
+    build:
+      context: .
+      dockerfile: deployment/docker/Dockerfile
+    container_name: voxpi-speech-intelligence
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    devices:
+      - "/dev/snd:/dev/snd" # Pass USB Microphone ALSA device to container
+    volumes:
+      - ./data:/app/data
+      - ./backups:/app/backups
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - VOXPI_DB_PATH=/app/data/speech_intelligence.db
+      - STT_MODEL=faster-whisper-small.en
+      - VAD_THRESHOLD=0.52
+      - SPEAKER_SEPARATION_ENABLED=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/system/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3

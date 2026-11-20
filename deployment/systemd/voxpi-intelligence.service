@@ -1,0 +1,19 @@
+[Unit]
+Description=VoxPi Personal AI Speech Intelligence System (Raspberry Pi ARM64)
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=pi
+WorkingDirectory=/opt/voxpi-speech-intelligence
+Environment=NODE_ENV=production
+Environment=PORT=3000
+ExecStart=/usr/bin/npm run start
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
